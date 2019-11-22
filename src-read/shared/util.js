@@ -401,15 +401,17 @@ export const identity = (_: any) => _
  * Generate a string containing static keys from compiler modules.
  *
  * 生成一个包含编译器模块静态键值的字符串
- * eg:
- * var test = genStaticKeys([{
- *   staticKeys:'a'
- * },{
- *   staticKeys:'b'
- * },{
- *   staticKeys:'c'
- * }])
- * console.log(test) => print: a,b,c
+ */
+ /*
+  // eg:
+  var test = genStaticKeys([{
+    staticKeys:'a'
+  },{
+    staticKeys:'b'
+  },{
+    staticKeys:'c'
+  }])
+  console.log(test) => print: a,b,c
  */
 export function genStaticKeys(modules: Array<ModuleOptions>): string {
   return modules.reduce((keys, m) => {
@@ -420,24 +422,33 @@ export function genStaticKeys(modules: Array<ModuleOptions>): string {
 /**
  * Check if two values are loosely equal - that is,
  * if they are plain objects, do they have the same shape?
+ * 判断两个对象内部结构是否相同（严格上来说两个对象是不相等，所以叫loose equal(松散相等？))
  */
 export function looseEqual(a: any, b: any): boolean {
   if (a === b) return true
   const isObjectA = isObject(a)
   const isObjectB = isObject(b)
+  // A和B都是对象
   if (isObjectA && isObjectB) {
     try {
       const isArrayA = Array.isArray(a)
       const isArrayB = Array.isArray(b)
+      // A和B都是数组
       if (isArrayA && isArrayB) {
+        // 两个数组长度相等，循环递归
         return a.length === b.length && a.every((e, i) => {
           return looseEqual(e, b[i])
         })
       } else if (a instanceof Date && b instanceof Date) {
+        // A和B是时间对象，则比较毫秒值
         return a.getTime() === b.getTime()
       } else if (!isArrayA && !isArrayB) {
+        // A和B都不是数组
+        // Object.keys=>处理对象，返回对象所有的KEY(会忽略子对象),组成一个数组，eg: var a = { name: {age:34}}; console.log(Object.keys(a)) // ['name']
         const keysA = Object.keys(a)
         const keysB = Object.keys(b)
+
+        // 两个对象一级key长度相等，循环递归
         return keysA.length === keysB.length && keysA.every(key => {
           return looseEqual(a[key], b[key])
         })
@@ -450,6 +461,7 @@ export function looseEqual(a: any, b: any): boolean {
       return false
     }
   } else if (!isObjectA && !isObjectB) {
+    // A 和B 都不是对象，则转换成字符串比较
     return String(a) === String(b)
   } else {
     return false
@@ -460,6 +472,8 @@ export function looseEqual(a: any, b: any): boolean {
  * Return the first index at which a loosely equal value can be
  * found in the array (if value is a plain object, the array must
  * contain an object of the same shape), or -1 if it is not present.
+ *
+ * 返回松散相等的两个值的第一个索引，如果找不到则返回-1
  */
 export function looseIndexOf(arr: Array<mixed>, val: mixed): number {
   for (let i = 0; i < arr.length; i++) {
@@ -470,6 +484,8 @@ export function looseIndexOf(arr: Array<mixed>, val: mixed): number {
 
 /**
  * Ensure a function is called only once.
+ *
+ * 确保一个函数只被调用了一次
  */
 export function once(fn: Function): Function {
   let called = false
