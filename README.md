@@ -1,7 +1,14 @@
-整个项目代码基于 https://github.com/vuejs/vue
+整个项目代码Clone于 https://github.com/vuejs/vue
 
-- src目录为官方原代码目录，未做修改（用于对比）
+- src
+  - 与src-bak的文件目录一样，只是添加了自己的理解和注释
 
-- src-read为已经看过的原码路径，与src内的文件一一对应，添加了相对应的中文注释。项目都是基于官方的注释翻译，或基于自己的理解添加，如有问题欢迎提 Issues 指正！
+  - 在src目录改，主要便于启动dev开发模式，便于console输出
+
+  - 每个目录添加了README.md文件
+
+- src-bak
+
+  - 目录为官方原代码目录，未做修改（用于对比）
 
 

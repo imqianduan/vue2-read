@@ -1,8 +1,6 @@
 /**
- * VUEæ„é€ å‡½æ•°å…¥å£
+ * VUE¹¹Ôìº¯ÊıÈë¿Ú
  */
-
-
 import { initMixin } from './init'
 import { stateMixin } from './state'
 import { renderMixin } from './render'
@@ -11,19 +9,19 @@ import { lifecycleMixin } from './lifecycle'
 import { warn } from '../util/index'
 
 /**
- * @param {*} options  new Vueæ—¶ä¼ å…¥çš„å‚æ•°
+ * @param {*} options  new VueÊ±´«ÈëµÄ²ÎÊı
  */
 function Vue (options) {
-  // ä¸æ˜¯ç”Ÿäº§ç¯å¢ƒï¼Œä¸”thisä¸æ˜¯Vueçš„å®ä¾‹ï¼Œåˆ™æŠ›å‡ºé”™è¯¯
+  // ²»ÊÇÉú²ú»·¾³£¬ÇÒthis²»ÊÇVueµÄÊµÀı£¬ÔòÅ×³ö´íÎó
   if (process.env.NODE_ENV !== 'production' && !(this instanceof Vue)) {
+    // warn·½·¨Ö»ÔÚ¿ª·¢»·¾³ÖĞ¿ÉÓÃ£¬Éú²ú»·¾³±íÏÖÎªÒ»¸ö¿Õ²Ù×÷£¨¿Õº¯Êı£©
+    // ÔÚ'src\core\util\debug.js`ÖĞ¶¨Òå
     warn('Vue is a constructor and should be called with the `new` keyword')
   }
 
-  console.log('1ã€åˆå§‹åŒ–Vueå®ä¾‹')
-  console.log('this:')
-  console.log(this);
-  console.log(this._init);
-  // åˆå§‹åŒ–
+  // Ö´ĞĞ³õÊ¼»¯
+  // _init·½·¨ÔÚ'/core/instance/init.js'ÎÄ¼şÖĞÓĞ¶¨Òå
+  // ×é¼şÃ¿Ò»´ÎäÖÈ¾£¬¶¼»á´¥·¢'_init'·½·¨£¬ÈçÍ¨¹ıv-forÑ­»·×Ó×é¼ş£¬Ã¿Ñ­»·Ò»´Î×Ó×é¼ş£¬¶¼»áÖ´ĞĞ`_init`·½·¨
   this._init(options)
 }
 
